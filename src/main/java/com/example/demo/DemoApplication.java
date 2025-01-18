@@ -19,12 +19,12 @@ public class DemoApplication {
     
     @GetMapping("/listclusters") 
     public String getAllClusters() { 
-        return "{'clusters':{'1':'cluster-1','2':'cluster-2','3':'cluster-3'}}"; 
+        return "List of clusters : cluster-1, cluster-2, cluster-3."; 
     } 
     
     @GetMapping("/getpodsforcluster/{clusterid}") 
     public String geBookById(@PathVariable String clusterid) { 
-        return "{'cluster-id':'"+clusterid+"','pods':{'1':'pod-1','2':'pod-2','3':'pod-3'}}"; 
+        return "Pods for cluster id "+clusterid+" are pod-1,pod,pod-3."; 
     } 
 
     public static void main(String[] args) {
