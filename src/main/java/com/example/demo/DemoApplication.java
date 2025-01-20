@@ -26,18 +26,18 @@ public class DemoApplication {
     }
     
     @GetMapping("/listclusters") 
-    public Environment getAllClusters() { 
+    public List<String> getAllClusters() { 
     	List<String> clusters = new ArrayList<String>();
     	clusters.add("cluster-1");
     	clusters.add("cluster-2");
     	clusters.add("cluster-3");
     	Environment env = new Environment();
     	env.setClusters(clusters);
-        return env; 
+        return clusters; 
     } 
     
     @GetMapping("/getpodsforcluster/{clusterid}") 
-    public Cluster getPodsForCluster(@PathVariable String clusterid) { 
+    public List<String> getPodsForCluster(@PathVariable String clusterid) { 
     	List<String> pods = new ArrayList<String>();
     	pods.add("pod-1");
     	pods.add("pod-2");
@@ -45,7 +45,7 @@ public class DemoApplication {
     	Cluster clstr = new Cluster();
     	clstr.setName(clusterid);
     	clstr.setPods(pods);
-        return clstr; 
+        return pods; 
     } 
 
     public static void main(String[] args) {
