@@ -25,7 +25,8 @@ public class DemoApplication {
         return "Hello World!";
     }
     
-    @GetMapping("/listclusters") 
+  
+    @GetMapping(value = "/listclusters",produces = "application/json") 
     public List<String> getAllClusters() { 
     	List<String> clusters = new ArrayList<String>();
     	clusters.add("cluster-1");
@@ -36,7 +37,7 @@ public class DemoApplication {
         return clusters; 
     } 
     
-    @GetMapping("/getpodsforcluster/{clusterid}") 
+    @GetMapping(value = "/getpodsforcluster/{clusterid}", produces = "application/json") 
     public List<String> getPodsForCluster(@PathVariable String clusterid) { 
     	List<String> pods = new ArrayList<String>();
     	pods.add("pod-1");
