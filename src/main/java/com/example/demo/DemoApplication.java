@@ -136,6 +136,14 @@ public class DemoApplication {
 		return logs;
 	}
 
+	@GetMapping(value = "/getinformationforlog/{log}", produces = "application/json")
+	public List<String> getInformationForLog(@PathVariable String log) {
+		List<String> logInformation = new ArrayList<>();
+		logInformation.add("No information available for the log: " + log);
+		return logInformation;
+	}
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
