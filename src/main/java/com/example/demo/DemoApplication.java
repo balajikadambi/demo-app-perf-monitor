@@ -22,15 +22,16 @@ public class DemoApplication {
 	}
 
 	@GetMapping(value = "/listclusters", produces = "application/json")
-	public String getAllClusters() {
+	public List<String> getAllClusters() {
 
-		return "<TABLE><TR><TH>Cluster ID</TH></TR><TR><TD>saas-k8s-local</TD></TR><TR><TD>artifactory-global</TD></TR><TR><TD>saas-k8s-global</TD></TR></TABLE>";
+//		return "<TABLE><TR><TH>Cluster ID</TH></TR><TR><TD>saas-k8s-local</TD></TR><TR><TD>artifactory-global</TD></TR><TR><TD>saas-k8s-global</TD></TR></TABLE>";
 
-//    	List<String> clusters = new ArrayList<String>();
+    	List<String> clusters = new ArrayList<String>();
+    	clusters.add("<TABLE><TR><TH>Cluster ID</TH></TR><TR><TD>saas-k8s-local</TD></TR><TR><TD>artifactory-global</TD></TR><TR><TD>saas-k8s-global</TD></TR></TABLE>");
 //    	clusters.add("saas-k8s-local");
 //    	clusters.add("artifactory-global");
 //    	clusters.add("saas-k8s-global");
-//        return clusters; 
+        return clusters; 
 	}
 
 	@GetMapping(value = "/getpodsforcluster/{clusterid}", produces = "application/json")
