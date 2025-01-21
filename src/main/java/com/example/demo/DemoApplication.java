@@ -136,8 +136,8 @@ public class DemoApplication {
 		return logs;
 	}
 
-	@GetMapping(value = "/getinformationforlog/{log}", produces = "application/json")
-	public List<String> getInformationForLog(@PathVariable String log) {
+	@PostMapping(value = "/getinformationforlog/", produces = "application/json")
+	public List<String> getInformationForLog(@RequestParam("log") String log) {
 		List<String> logInformation = new ArrayList<>();
 		logInformation.add("No information available for the log: " + log);
 		return logInformation;
