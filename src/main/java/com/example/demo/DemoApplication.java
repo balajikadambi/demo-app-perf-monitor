@@ -164,6 +164,14 @@ public class DemoApplication {
 		try
 		{
 			String result = restTemplate.getForObject(url, String.class);
+			System.out.println(result);
+            if(result != null) {
+				result = result.trim().substring(1, result.length()-2);
+				result = "<p>" + result + "</p>";
+				result = result.replaceAll("Answer 0 =", "");
+				result = result.replaceAll("\\\\n", "<br>");
+				result = result.replaceAll("\\n", "<br>");
+			}
 			logInformation.add(result);
 		}
 		catch (Exception e)
