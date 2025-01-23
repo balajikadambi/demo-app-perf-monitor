@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @SpringBootApplication
 public class DemoApplication {
+
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@RequestMapping("/")
 	String home() {
@@ -136,10 +142,34 @@ public class DemoApplication {
 		return logs;
 	}
 
-	@PostMapping(value = "/getinformationforlog/", produces = "application/json")
-	public List<String> getInformationForLog(@RequestParam("log") String log) {
+	@PostMapping(value = "/getinformationforlog", produces = "application/json")
+	public List<String> getInformationForLog(@RequestParam("log") String log,
+											 @RequestParam("projectId") String projectId,
+											 @RequestParam("apikey") String apikey) {
 		List<String> logInformation = new ArrayList<>();
-		logInformation.add("No information available for the log: " + log);
+
+		if(log == null || log.isEmpty())
+		{
+			logInformation.add("No information available for the log: " + log);
+			return logInformation;
+		}
+
+		String baseUrl = "https://rca-analyzer-balajikibm-dev.apps.rm3.7wse.p1.openshiftapps.com/watsonx_ai_service";
+		String url = UriComponentsBuilder.fromHttpUrl(baseUrl)
+				.queryParam("query", log)
+				.queryParam("apikey", apikey)
+				.queryParam("projectid", projectId)
+				.toUriString();
+
+		try
+		{
+			String result = restTemplate.getForObject(url, String.class);
+			logInformation.add(result);
+		}
+		catch (Exception e)
+		{
+			logInformation.add("No information available for the log: " + log);
+		}
 		return logInformation;
 	}
 
