@@ -81,9 +81,9 @@ public class DemoApplication {
 	  List<String> queries = new ArrayList<>();
 	  queries.add("<TABLE>" +
 				"<TR><TH>Top failing queries</TH></TR>" +
-				"<TR><TD>1. Code 160: TOO_SLOW SELECT stream_name</br> FROM logs.all_log_messages_v4</br> WHERE client_id = 'test_client'</br> 	AND ts >= 1737097305735000000</br> 	AND ts <= 1737169305742000000</br> 	AND (call_id = 572efr576512 OR span_id ILIKE 'a4f2fds85416ee04820')</br> 	AND (log_level ILIKE 'WARN' OR log_level ILIKE 'ERROR')</br> LIMIT 1 FORMAT JSON</br></TD></TR>"+
-				"<TR><TD>2. Code 159: TIMEOUT_EXCEEDED</br> INSERT INTO logs.all_log_messages_v4 (client_id,</br> 	host_id,</br> 	plugin_id,</br> 	steady_id,</br> 	stream_name,.....)</br></TD></TR>" +
-				"<TR><TD>3. Socket closed: SELECT item_id,</br> 	ts,</br> 	log_level,</br> 	raw_message,</br> 	`custom_tags.key`,</br> 	`custom_tags.value`,</br> 	`exception.type`,</br> 	`exception.message`,</br> 	`exception.stacktrace`</br> FROM logs.all_log_messages_v4 PREWHERE trace_id ILIKE '%9asf39eeb3'</br> WHERE client_id = 'demo_client'</br> 	AND ts >= 1737716150630000000</br> 	AND ts <= 1737716210630000000</br> 	AND item_id > '18ccc21'</br> ORDER BY item_id ASC</br> LIMIT 20 FORMAT JSON</TR>" +
+				"<TR><TD><b> Code 160: TOO_SLOW</b></br> SELECT stream_name</br> FROM logs.all_log_messages_v4</br> WHERE client_id = 'test_client'</br> 	AND ts >= 1737097305735000000</br> 	AND ts <= 1737169305742000000</br> 	AND (call_id = 572efr576512 OR span_id ILIKE 'a4f2fds85416ee04820')</br> 	AND (log_level ILIKE 'WARN' OR log_level ILIKE 'ERROR')</br> LIMIT 1 FORMAT JSON</br></TD></TR>"+
+				"<TR><TD><b> Code 159: TIMEOUT_EXCEEDED</b></br> INSERT INTO logs.all_log_messages_v4 (client_id,</br> 	host_id,</br> 	plugin_id,</br> 	steady_id,</br> 	stream_name,.....)</br></TD></TR>" +
+				"<TR><TD><b> Socket closed:</b></br> SELECT item_id,</br> 	ts,</br> 	log_level,</br> 	raw_message,</br> 	`custom_tags.key`,</br> 	`custom_tags.value`,</br> 	`exception.type`,</br> 	`exception.message`,</br> 	`exception.stacktrace`</br> FROM logs.all_log_messages_v4 PREWHERE trace_id ILIKE '%9asf39eeb3'</br> WHERE client_id = 'demo_client'</br> 	AND ts >= 1737716150630000000</br> 	AND ts <= 1737716210630000000</br> 	AND item_id > '18ccc21'</br> ORDER BY item_id ASC</br> LIMIT 20 FORMAT JSON</TR>" +
 				"</TABLE>");	
 	  return queries;
 	}
@@ -98,23 +98,23 @@ public class DemoApplication {
 		case "log-writer":
 			logs.add("<TABLE>" +
 				"<TR><TH>Logs</TH></TR>" +
-				"<TR><TD>1. 2025-01-13 09:07:05,733 ERROR log-reader c.i.l.r.h.DeleteLogsCommandHandler - Deleting logs for client saas_instana_test failed at 1735721760000000000: com.instana.clickhouse.client.exception.ClickHouseRequestException: Failed to execute ClickHouse request (root cause: DB::Exception Code: 159) Query: DELETE FROM logs.log_messages_v4 WHERE (client_id = 'saas_instana_test') AND (ts <= 1735721760000000000)</TD></TR>" +
-				"<TR><TD>2. 2025-01-13 09:13:25,076 ERROR log-reader c.i.l.r.h.GetLogVolumeMetricsCommandHandler - Error in parsing volume metrics Invalid number of retention days: 6</TD></TR>" +
-				"<TR><TD>3. 2025-01-13 09:13:25,075 WARN log-reader c.i.logging.shared.LogRetention - getRetentionFactor: Invalid retentionDays = 6</TD></TR>" +
-				"<TR><TD>4. 2025-01-13 09:14:23,655 INFO log-reader c.i.l.r.h.DeleteLogsHistoryCommandHandler - Delete logs history called: client_id: \"saas_instana_test\"</TD></TR>" +
-				"<TR><TD>5. [20241221 15:31:23.003094    12 HttpConnectionPool.cpp:78] Cannot post http://aggregator-0-1.aggregators-headless.instana-magenta-beeinstana.svc.cluster.local:9998/PutMetricData?desired_data_version=2&timestamp=1734794668828. Status: 0. Error Code: 1. Error: Failed to connect to aggregator-0-1.aggregators-headless.instana-magenta-beeinstana.svc.cluster.local port 9998 after 1 ms: Couldn't connect to server</TD></TR>" +
-				"<TR><TD>6. [2024/12/21 15:31:23] [error] [output:cloudwatch_logs:cloudwatch_logs.0] Failed to create log stream</TD></TR>" +
-				"<TR><TD>7. [2024/12/21 15:31:23] [error] [output:cloudwatch_logs:cloudwatch_logs.0] Failed to send events</TD></TR>" +
-				"<TR><TD>8. 2024-12-21 15:31:00,449 WARN  appdata-writer c.i.a.writer.service.ChainsWriter - Failed to insert batch</TD></TR>" +
-				"<TR><TD>9. 2024-12-21T15:31:15.386+00:00 | WARN  | stana-agent-scheduler-thread-6-4 | yDiscoveryTicker | com.instana.agent - 1.1.740 | Discovery time (20293 ms)</TD></TR>" +
-				"<TR><TD>10. 2024-12-21 15:31:30,303 WARN  appdata-writer c.i.a.writer.service.CallsWriter - Failed to insert batch</TD></TR>" +
-				"<TR><TD>11. 2024-12-21 15:31:44,424 WARN  instana-plg-issue-tracker c.i.b.c.s.PeriodicJobRegistryImpl - Periodic job Maintenance configs reloading has failed. Retrying in 60 sec.</TD></TR>" +
-				"<TR><TD>12. 2024-12-21 15:32:04,129 WARN  log-writer c.i.l.w.service.LogMessageWriter - Failed to insert batch. Batch being reset.</TD></TR>" +
-				"<TR><TD>13. I1221 15:31:38.830192 1 filter_out_schedulable.go:63] Filtering out schedulables</TD></TR>" +
-				"<TR><TD>14. I1221 15:31:38.830211 1 filter_out_schedulable.go:120] 0 pods marked as unschedulable can be scheduled.</TD></TR>" +
-				"<TR><TD>15. I1221 15:31:38.830219 1 filter_out_schedulable.go:83] No schedulable pods</TD></TR>" +
-				"<TR><TD>16. I1221 15:31:38.830230 1 static_autoscaler.go:511] No unschedulable pods</TD></TR>" +
-				"<TR><TD>17. I1221 15:31:38.632423 1 static_autoscaler.go:276] Starting main loop</TD></TR>" +
+				"<TR><TD><b> 2025-01-13 09:07:05,733 ERROR</b> log-reader c.i.l.r.h.DeleteLogsCommandHandler - Deleting logs for client saas_instana_test failed at 1735721760000000000: com.instana.clickhouse.client.exception.ClickHouseRequestException: Failed to execute ClickHouse request (root cause: DB::Exception Code: 159) Query: DELETE FROM logs.log_messages_v4 WHERE (client_id = 'saas_instana_test') AND (ts <= 1735721760000000000)</TD></TR>" +
+				"<TR><TD><b> 2025-01-13 09:13:25,076 ERROR </b>log-reader c.i.l.r.h.GetLogVolumeMetricsCommandHandler - Error in parsing volume metrics Invalid number of retention days: 6</TD></TR>" +
+				"<TR><TD><b> 2025-01-13 09:13:25,075 WARN </b>log-reader c.i.logging.shared.LogRetention - getRetentionFactor: Invalid retentionDays = 6</TD></TR>" +
+				"<TR><TD><b> 2025-01-13 09:14:23,655 INFO </b>log-reader c.i.l.r.h.DeleteLogsHistoryCommandHandler - Delete logs history called: client_id: \"saas_instana_test\"</TD></TR>" +
+				"<TR><TD><b> [20241221 15:31:23.003094 ERROR</b>    12 HttpConnectionPool.cpp:78] Cannot post http://aggregator-0-1.aggregators-headless.instana-magenta-beeinstana.svc.cluster.local:9998/PutMetricData?desired_data_version=2&timestamp=1734794668828. Status: 0. Error Code: 1. Error: Failed to connect to aggregator-0-1.aggregators-headless.instana-magenta-beeinstana.svc.cluster.local port 9998 after 1 ms: Couldn't connect to server</TD></TR>" +
+				"<TR><TD><b> [2024/12/21 15:31:23] [error]</b> [output:cloudwatch_logs:cloudwatch_logs.0] Failed to create log stream</TD></TR>" +
+				"<TR><TD><b> [2024/12/21 15:31:23] [error]</b> [output:cloudwatch_logs:cloudwatch_logs.0] Failed to send events</TD></TR>" +
+				"<TR><TD><b> 2024-12-21 15:31:00,449 WARN</b>  appdata-writer c.i.a.writer.service.ChainsWriter - Failed to insert batch</TD></TR>" +
+				"<TR><TD><b> 2024-12-21T15:31:15.386+00:00 | WARN</b>  | stana-agent-scheduler-thread-6-4 | yDiscoveryTicker | com.instana.agent - 1.1.740 | Discovery time (20293 ms)</TD></TR>" +
+				"<TR><TD><b> 2024-12-21 15:31:30,303 WARN</b>  appdata-writer c.i.a.writer.service.CallsWriter - Failed to insert batch</TD></TR>" +
+				"<TR><TD><b> 2024-12-21 15:31:44,424 WARN</b>  instana-plg-issue-tracker c.i.b.c.s.PeriodicJobRegistryImpl - Periodic job Maintenance configs reloading has failed. Retrying in 60 sec.</TD></TR>" +
+				"<TR><TD><b> 2024-12-21 15:32:04,129 WARN</b>  log-writer c.i.l.w.service.LogMessageWriter - Failed to insert batch. Batch being reset.</TD></TR>" +
+				"<TR><TD><b> I1221 15:31:38.830192 1</b> filter_out_schedulable.go:63] Filtering out schedulables</TD></TR>" +
+				"<TR><TD><b> I1221 15:31:38.830211 1 </b>filter_out_schedulable.go:120] 0 pods marked as unschedulable can be scheduled.</TD></TR>" +
+				"<TR><TD><b> I1221 15:31:38.830219 1</b> filter_out_schedulable.go:83] No schedulable pods</TD></TR>" +
+				"<TR><TD><b> I1221 15:31:38.830230 1</b> static_autoscaler.go:511] No unschedulable pods</TD></TR>" +
+				"<TR><TD><b> I1221 15:31:38.632423 1 </b>static_autoscaler.go:276] Starting main loop</TD></TR>" +
 				"</TABLE>");
 			break;
 
