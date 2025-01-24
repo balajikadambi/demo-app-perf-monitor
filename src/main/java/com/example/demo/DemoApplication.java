@@ -1,17 +1,17 @@
 package com.example.demo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.*;
-
-import com.example.demo.model.Cluster;
-import com.example.demo.model.Environment;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -75,6 +75,19 @@ public class DemoApplication {
 		}
 		return pods;
 	}
+	
+	@GetMapping(value = "/gettopfailingqueries", produces = "application/json")
+	public List<String> getTopFailingQueries() {
+	  List<String> queries = new ArrayList<>();
+	  queries.add("<TABLE>" +
+				"<TR><TH>Top failing queries</TH></TR>" +
+				"<TR><TD>1. Code 160: TOO_SLOW SELECT stream_name</br> FROM logs.all_log_messages_v4</br> WHERE client_id = 'test_client'</br> 	AND ts >= 1737097305735000000</br> 	AND ts <= 1737169305742000000</br> 	AND (call_id = 572efr576512 OR span_id ILIKE 'a4f2fds85416ee04820')</br> 	AND (log_level ILIKE 'WARN' OR log_level ILIKE 'ERROR')</br> LIMIT 1 FORMAT JSON</br></TD></TR>"+
+				"<TR><TD>2. Code 159: TIMEOUT_EXCEEDED</br> INSERT INTO logs.all_log_messages_v4 (client_id,</br> 	host_id,</br> 	plugin_id,</br> 	steady_id,</br> 	stream_name,.....)</br></TD></TR>" +
+				"<TR><TD>3. Socket closed: SELECT item_id,</br> 	ts,</br> 	log_level,</br> 	raw_message,</br> 	`custom_tags.key`,</br> 	`custom_tags.value`,</br> 	`exception.type`,</br> 	`exception.message`,</br> 	`exception.stacktrace`</br> FROM logs.all_log_messages_v4 PREWHERE trace_id ILIKE '%9asf39eeb3'</br> WHERE client_id = 'demo_client'</br> 	AND ts >= 1737716150630000000</br> 	AND ts <= 1737716210630000000</br> 	AND item_id > '18ccc21'</br> ORDER BY item_id ASC</br> LIMIT 20 FORMAT JSON</TR>" +
+				"</TABLE>");	
+	  return queries;
+	}
+	
 
 	@GetMapping(value = "/getlogsforpod/{podid}", produces = "application/json")
 	public List<String> getLogsForCPod(@PathVariable String podid) {
