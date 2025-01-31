@@ -80,11 +80,10 @@ public class DemoApplication {
 	public List<String> getTopFailingQueries() {
 	  List<String> queries = new ArrayList<>();
 	  queries.add("<TABLE>" +
-				"<TR><TH>Top failing queries</TH></TR>" +
-				"<TR><TD><b> Code 160: TOO_SLOW</b></br> SELECT stream_name</br> FROM logs.all_log_messages_v4</br> WHERE client_id = 'test_client'</br> 	AND ts >= 1737097305735000000</br> 	AND ts <= 1737169305742000000</br> 	AND (call_id = 572efr576512 OR span_id ILIKE 'a4f2fds85416ee04820')</br> 	AND (log_level ILIKE 'WARN' OR log_level ILIKE 'ERROR')</br> LIMIT 1 FORMAT JSON</br></TD></TR>"+
-				"<TR><TD><b> Code 159: TIMEOUT_EXCEEDED</b></br> INSERT INTO logs.all_log_messages_v4 (client_id,</br> 	host_id,</br> 	plugin_id,</br> 	steady_id,</br> 	stream_name,.....)</br></TD></TR>" +
-				"<TR><TD><b> Socket closed:</b></br> SELECT item_id,</br> 	ts,</br> 	log_level,</br> 	raw_message,</br> 	`custom_tags.key`,</br> 	`custom_tags.value`,</br> 	`exception.type`,</br> 	`exception.message`,</br> 	`exception.stacktrace`</br> FROM logs.all_log_messages_v4 PREWHERE trace_id ILIKE '%9asf39eeb3'</br> WHERE client_id = 'demo_client'</br> 	AND ts >= 1737716150630000000</br> 	AND ts <= 1737716210630000000</br> 	AND item_id > '18ccc21'</br> ORDER BY item_id ASC</br> LIMIT 20 FORMAT JSON</TR>" +
-				"</TABLE>");	
+             "<TR><TD><b>SELECT `group_by_column_alias`,COUNT() AS `number_of_logs`</b> <br/>  FROM logs.all_log_messages_v4 <br/>  WHERE client_id = 'demo_client' <br/>  AND ts >= 1737978021968000000 AND ts <= 1738064421968000000 <br/>  AND (arrayExists((a,b) -> (a = 'service_name' AND b ILIKE '%-catalogservices%'),`custom_tags.key`,`custom_tags.value`) = 1 <br/>  OR arrayExists((a,b) -> (a = 'service_name' AND b ILIKE '%-ecommratingsandreviews%'),`custom_tags.key`,`custom_tags.value`) = 1<br/>  OR arrayExists((a,b) -> (a = 'service_name' AND b ILIKE '%-foundati<br/></TD></TR>"+
+             "<TR><TD><b>SELECT `bucket`,countIf(arrayExists((a,b) -> (a = 'service_name' AND b ILIKE 'int-foundationservices'),</b><br/>   `custom_tags.key`,`custom_tags.value`) = 1) AS `m_y1-4`,<br/>   countIf(arrayExists((a,b) -> (a = 'service_name' AND b ILIKE 'int-marketplaceservices'),<br/>   `custom_tags.key`,`custom_tags.value`) = 1) AS `m_y1-3`,<br/>   countIf(arrayExists((a,b) -> (a = 'service_name' AND b ILIKE 'int-searchservices'),<br/>   `custom_tags.key`,`custom_tags.value`) = 1) AS `m_y1-2`,<br/>   countIf(arrayExists((a,b) -> (a = 'service_name' AND b ILIKE 'int-merc<br/></TD></TR>" +
+             "<TR><TD><b>SELECT stream_name FROM logs.all_log_messages_v4</b> <br/>  WHERE client_id = 'demo_client' <br/>  AND ts >= 1737683688626000000 AND ts <= 1737755688685000000 <br/>  AND (call_id = 8756396091760715299 OR span_id ILIKE '7384f7dd623') <br/>  AND (log_level ILIKE 'WARN' OR log_level ILIKE 'ERROR') LIMIT 1 FORMAT JSON<br/></TR>" +
+             "</TABLE>");	
 	  return queries;
 	}
 	
